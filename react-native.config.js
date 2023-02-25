@@ -4,7 +4,7 @@ module.exports = {
     android: {},
   },
   assets: [
-    // './src/assets/fonts',
+    './src/assets/fonts',
     './node_modules/react-native-vector-icons/Fonts/Feather.ttf',
   ],
   dependencies: {
