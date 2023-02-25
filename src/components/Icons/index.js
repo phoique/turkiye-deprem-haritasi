@@ -3,7 +3,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import {useTheme} from '../../contexts';
 import * as CustomSvgIcons from './custom';
 
-function Icon({type, name, color, size, style}) {
+const Icon = ({type, name, color, size, style}) => {
   const {colors, themeMode} = useTheme();
   if (type === 'Feather') {
     return (
@@ -20,7 +20,7 @@ function Icon({type, name, color, size, style}) {
     return <SvgIconWrapper height={15} width={20} {...style} />;
   }
   return <Feather name="x" />;
-}
+};
 
 Icon.defaultProps = {
   type: 'Feather',

@@ -4,7 +4,7 @@ import MainNavigation from './navigation';
 import {ThemeContextProvider} from './contexts';
 import './languages';
 
-function App() {
+const App = () => {
   return (
     <SafeAreaProvider>
       <ThemeContextProvider>
@@ -12,6 +12,6 @@ function App() {
       </ThemeContextProvider>
     </SafeAreaProvider>
   );
-}
+};
 
 export default App;
