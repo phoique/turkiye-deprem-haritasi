@@ -2,9 +2,11 @@ import React from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import {Icon} from '../components';
 import useStyles from './useStyles';
+import {useTheme} from '../contexts';
 
 const BottomItem = ({state, descriptors, navigation}) => {
   const styles = useStyles();
+  const {colors, themeMode} = useTheme();
 
   const handlePress = React.useCallback(
     (route, isFocused) => {
@@ -48,7 +50,9 @@ const BottomItem = ({state, descriptors, navigation}) => {
                 type="Feather"
                 name={icon}
                 size={30}
-                color={isFocused ? 'black' : 'grey'}
+                color={
+                  isFocused ? colors[themeMode].black : colors[themeMode].gray
+                }
               />
             </TouchableOpacity>
           );
