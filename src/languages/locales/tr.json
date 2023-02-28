@@ -1,1 +1,8 @@
-{}
+{
+  "screens": {
+    "home": {
+      "headerTitle": "Son depremler",
+      "headerSubTitle": "{{total}} adet deprem kaydı bulundu"
+    }
+  }
+}

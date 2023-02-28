@@ -19,7 +19,7 @@ const BottomNavigation = () => {
       <Tab.Screen
         name="Home"
         component={HomeScreen}
-        options={{tabBarIcon: 'home'}}
+        options={{tabBarIcon: 'home', headerShown: false}}
       />
       <Tab.Screen
         name="Map"

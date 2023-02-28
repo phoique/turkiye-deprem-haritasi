@@ -9,6 +9,7 @@ const theme = {
       background: '#F9FBFF',
       text: '#000',
       shadow: '#000',
+      red: '#e74c3c',
     },
     dark: {},
   },
@@ -24,8 +25,8 @@ const theme = {
   },
   typography: {
     h1: 32,
-    h2: 24,
-    h3: 28,
+    h2: 28,
+    h3: 24,
     h4: 16,
     h5: 13,
     h6: 10,
