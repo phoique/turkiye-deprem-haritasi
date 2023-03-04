@@ -1,16 +1,21 @@
 import 'react-native-gesture-handler';
+import './languages';
 import * as React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import Toast from 'react-native-toast-message';
 import MainNavigation from './navigation';
 import {ThemeContextProvider} from './contexts';
-import './languages';
+import {StoreProvider} from './store';
 
 const App = () => {
   return (
     <SafeAreaProvider>
-      <ThemeContextProvider>
-        <MainNavigation />
-      </ThemeContextProvider>
+      <StoreProvider>
+        <ThemeContextProvider>
+          <MainNavigation />
+          <Toast />
+        </ThemeContextProvider>
+      </StoreProvider>
     </SafeAreaProvider>
   );
 };
