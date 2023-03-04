@@ -20,7 +20,14 @@ const EarthquakeDetail = ({earthquakeDetail, setClose}) => {
 
   if (!earthquakeDetail) return null;
 
-  const {mag, title, depth, date, rev, location_properties} = earthquakeDetail;
+  const {
+    mag,
+    title,
+    depth,
+    date,
+    rev,
+    location_properties: {closestCity},
+  } = earthquakeDetail;
   return (
     <BottomSheet
       index={snapPoints.length - 1}
@@ -55,7 +62,7 @@ const EarthquakeDetail = ({earthquakeDetail, setClose}) => {
           <InfoCard
             icon="activity"
             title={t('components.earthquakeDetail.affectedAreaTitle')}
-            description={location_properties.closestCity.name}
+            description={closestCity.name}
           />
         </View>
         <View style={styles.otherInfoRowContainer}>

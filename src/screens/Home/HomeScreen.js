@@ -25,7 +25,7 @@ const HomeScreen = () => {
   }, []);
 
   const keyExtractor = React.useCallback(
-    ({earthquake_id}) => `home-${earthquake_id}`,
+    ({earthquake_id: id}) => `home-${id}`,
     [],
   );
 

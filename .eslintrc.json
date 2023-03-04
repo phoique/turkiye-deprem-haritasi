@@ -4,14 +4,14 @@
     "es2021": true
   },
   "extends": [
+    "@react-native-community",
     "plugin:react/recommended",
     "airbnb",
     "plugin:eslint-comments/recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:prettier/recommended",
-    "prettier",
-    "@react-native-community"
+    "prettier"
   ],
   "parserOptions": {
     "ecmaFeatures": {

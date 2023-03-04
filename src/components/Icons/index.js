@@ -15,7 +15,7 @@ const Icon = ({type, name, color, size, style}) => {
       />
     );
   }
-  if (type === 'custom') {
+  if (type === 'custom' && CustomSvgIcons[name]) {
     const SvgIconWrapper = CustomSvgIcons[name];
     return <SvgIconWrapper height={15} width={20} {...style} />;
   }
