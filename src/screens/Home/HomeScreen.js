@@ -19,6 +19,7 @@ const HomeScreen = () => {
       <EarthquakeCardItem
         earthquakeDetail={item}
         setSelectedEarthquake={setSelectedEarthquake}
+        isLoading={item?.isLoading}
       />
     );
   }, []);
@@ -32,13 +33,23 @@ const HomeScreen = () => {
     setSelectedEarthquake(null);
   }, []);
 
+  const loadingData = React.useMemo(() => {
+    if (getLastEarthquakes.isFetching) {
+      return [...Array(4).keys()].map(index => ({
+        earthquake_id: `loading-${index}`,
+        isLoading: true,
+      }));
+    }
+    return null;
+  }, [getLastEarthquakes.isFetching]);
+
   return (
     <Container safeAreaTop={false}>
       <View style={styles.homeContainer}>
         <HomeHeader total={getLastEarthquakes.data?.length} />
         <View style={styles.earthquakeCard}>
           <FlatList
-            data={getLastEarthquakes.data}
+            data={loadingData ?? getLastEarthquakes.data}
             renderItem={renderItem}
             keyExtractor={keyExtractor}
           />

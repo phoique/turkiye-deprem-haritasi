@@ -4,7 +4,7 @@ import {useTheme} from '../../contexts';
 
 function useStyles() {
   const insets = useSafeAreaInsets();
-  const {colors, typography} = useTheme();
+  const {colors, typography, themeMode} = useTheme();
   return StyleSheet.create({
     homeContainer: {
       flex: 2,
@@ -92,6 +92,29 @@ function useStyles() {
       fontSize: typography.h6,
       fontFamily: 'Poppins-Regular',
       color: colors.light.gray,
+    },
+
+    // Skeleton style
+    earthquakeCardItemSizeSkeleton: {
+      backgroundColor: colors[themeMode].lightGray,
+      borderRadius: 15,
+      marginRight: 10,
+      height: '100%',
+      width: 60,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    textSkeleton: {
+      backgroundColor: colors[themeMode].lightGray,
+      borderRadius: 15,
+      height: 20,
+      width: '40%',
+    },
+    textSkeleton2: {
+      backgroundColor: colors[themeMode].lightGray,
+      borderRadius: 15,
+      height: 20,
+      width: '50%',
     },
   });
 }

@@ -4,13 +4,30 @@ import {useTranslation} from 'react-i18next';
 import {date} from '../../../helpers';
 import useStyles from '../useStyles';
 
-const EarthquakeCardItem = ({earthquakeDetail, setSelectedEarthquake}) => {
+const EarthquakeCardItem = ({
+  earthquakeDetail,
+  setSelectedEarthquake,
+  isLoading,
+}) => {
   const {t} = useTranslation();
   const styles = useStyles();
 
   const handlePress = React.useCallback(() => {
     setSelectedEarthquake(earthquakeDetail);
   }, [earthquakeDetail, setSelectedEarthquake]);
+
+  // is loading durumunda bu kartın skeleton görünümü
+  if (isLoading) {
+    return (
+      <TouchableOpacity style={styles.earthquakeCardItem} onPress={handlePress}>
+        <View style={styles.earthquakeCardItemSizeSkeleton} />
+        <View style={styles.earthquakeCardItemInfoContainer}>
+          <View style={styles.textSkeleton} />
+          <View style={styles.textSkeleton2} />
+        </View>
+      </TouchableOpacity>
+    );
+  }
 
   const {mag, title, depth, timestamp, rev} = earthquakeDetail;
   return (

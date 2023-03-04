@@ -10,6 +10,7 @@ const theme = {
       text: '#000',
       shadow: '#000',
       red: '#e74c3c',
+      lightGray: '#ecf0f1',
     },
     dark: {},
   },
