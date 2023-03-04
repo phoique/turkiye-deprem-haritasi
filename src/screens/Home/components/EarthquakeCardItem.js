@@ -10,7 +10,9 @@ const EarthquakeCardItem = ({
   isLoading,
 }) => {
   const {t} = useTranslation();
-  const styles = useStyles();
+  const {title, depth, timestamp, rev, mag} = earthquakeDetail;
+  const magnitude = rev || mag;
+  const styles = useStyles(magnitude);
 
   const handlePress = React.useCallback(() => {
     setSelectedEarthquake(earthquakeDetail);
@@ -29,11 +31,10 @@ const EarthquakeCardItem = ({
     );
   }
 
-  const {mag, title, depth, timestamp, rev} = earthquakeDetail;
   return (
     <TouchableOpacity style={styles.earthquakeCardItem} onPress={handlePress}>
       <View style={styles.earthquakeCardItemSize}>
-        <Text style={styles.earthquakeCardItemSizeText}>{rev || mag}</Text>
+        <Text style={styles.earthquakeCardItemSizeText}>{magnitude}</Text>
       </View>
       <View style={styles.earthquakeCardItemInfoContainer}>
         <Text style={styles.earthquakeCardItemInfoTitle}>{title}</Text>

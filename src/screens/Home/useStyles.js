@@ -1,8 +1,9 @@
 import {StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useTheme} from '../../contexts';
+import {colorByMagnitude} from '../../helpers';
 
-function useStyles() {
+function useStyles(magnitude) {
   const insets = useSafeAreaInsets();
   const {colors, typography, themeMode} = useTheme();
   return StyleSheet.create({
@@ -59,7 +60,7 @@ function useStyles() {
       elevation: 4,
     },
     earthquakeCardItemSize: {
-      backgroundColor: '#e67e22',
+      backgroundColor: colorByMagnitude(magnitude),
       borderRadius: 15,
       marginRight: 10,
       height: '100%',

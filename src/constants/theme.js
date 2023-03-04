@@ -13,6 +13,18 @@ const theme = {
       lightGray: '#ecf0f1',
     },
     dark: {},
+    colorByMagnitude: {
+      1: '#2ed573',
+      2: '#32e677',
+      3: '#3cfa82',
+      4: '#c0ff00',
+      5: '#f1c40f',
+      6: '#f39c12',
+      7: '#e74c3c',
+      8: '#d63031',
+      9: '#c0392b',
+      10: '#b71540',
+    },
   },
   sizes: {
     screen: {
