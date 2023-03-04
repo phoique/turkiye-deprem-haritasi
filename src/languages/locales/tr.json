@@ -5,5 +5,11 @@
       "headerSubTitle": "{{total}} adet deprem kaydı bulundu",
       "depth": "Derinlik: {{depth}} km"
     }
+  },
+  "services": {
+    "error": {
+      "getLastEarthquakes": "Son depremler alınamadı!"
+    },
+    "success": {}
   }
 }

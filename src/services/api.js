@@ -36,7 +36,19 @@ const api = createApi({
   refetchOnFocus: true,
   refetchOnReconnect: true,
   baseQuery: baseQueryCustom,
-  endpoints: () => ({}),
+  endpoints: builder => ({
+    getLastEarthquakes: builder.query({
+      query: () => ({
+        url: '/kandilli/live',
+        method: 'GET',
+      }),
+      providesTags: result =>
+        providesTags(result?.data, 'getLastEarthquakes', 'earthquake_id'),
+      extraOptions: {
+        toastErrorMessageKey: 'getLastEarthquakes',
+      },
+    }),
+  }),
 });
 
 /**
