@@ -60,19 +60,19 @@ const EarthquakeDetail = ({earthquakeDetail, setClose}) => {
             })}
           />
           <InfoCard
-            icon="activity"
+            icon="list"
             title={t('components.earthquakeDetail.affectedAreaTitle')}
             description={closestCity.name}
           />
         </View>
         <View style={styles.otherInfoRowContainer}>
           <InfoCard
-            icon="activity"
+            icon="edit-3"
             title={t('components.earthquakeDetail.beforeRevTitle')}
             description={rev ? `${rev} - ${mag}` : '-'}
           />
           <InfoCard
-            icon="activity"
+            icon="clock"
             title={t('components.earthquakeDetail.timeTitle')}
             description={date}
           />

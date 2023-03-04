@@ -8,7 +8,7 @@ const InfoCard = ({icon, title, description}) => {
   return (
     <View style={styles.otherInfoContainer}>
       <View style={styles.otherInfoTitleContainer}>
-        <Icon name={icon} size={24} style={styles.otherInfoIcon} />
+        <Icon name={icon} size={22} style={styles.otherInfoIcon} />
         <Text style={styles.otherInfoTitle}>{title}</Text>
       </View>
       <Text style={styles.otherInfoDescription}>{description}</Text>

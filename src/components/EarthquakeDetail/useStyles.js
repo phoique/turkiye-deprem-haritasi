@@ -58,12 +58,12 @@ function useStyles() {
     },
     otherInfoTitle: {
       fontFamily: 'Poppins-Bold',
-      fontSize: typography.h4,
+      fontSize: typography.h4 - 2,
       color: colors[themeMode].gray,
     },
     otherInfoDescription: {
       fontFamily: 'Poppins-Bold',
-      fontSize: typography.h5,
+      fontSize: typography.h5 - 1,
     },
     otherInfoIcon: {
       color: colors[themeMode].gray,
