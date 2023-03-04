@@ -6,6 +6,20 @@
       "depth": "Derinlik: {{depth}} km"
     }
   },
+  "constants": {
+    "country": {
+      "turkey": "Türkiye"
+    }
+  },
+  "components": {
+    "earthquakeDetail": {
+      "depthTitle": "Derinlik",
+      "depthDescription": "{{depth}} km derinlikte",
+      "affectedAreaTitle": "Etkilenen iller",
+      "beforeRevTitle": "Revize öncesi",
+      "timeTitle": "Zaman"
+    }
+  },
   "services": {
     "error": {
       "getLastEarthquakes": "Son depremler alınamadı!"

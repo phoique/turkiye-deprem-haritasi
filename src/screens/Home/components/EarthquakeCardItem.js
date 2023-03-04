@@ -1,26 +1,22 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {useTranslation} from 'react-i18next';
+import {date} from '../../../helpers';
 import useStyles from '../useStyles';
 
-const EarthquakeCardItem = ({
-  mag,
-  title,
-  depth,
-  time,
-  setSelectedEarthquake,
-}) => {
+const EarthquakeCardItem = ({earthquakeDetail, setSelectedEarthquake}) => {
   const {t} = useTranslation();
   const styles = useStyles();
 
   const handlePress = React.useCallback(() => {
-    setSelectedEarthquake(title);
-  }, [setSelectedEarthquake, title]);
+    setSelectedEarthquake(earthquakeDetail);
+  }, [earthquakeDetail, setSelectedEarthquake]);
 
+  const {mag, title, depth, timestamp, rev} = earthquakeDetail;
   return (
     <TouchableOpacity style={styles.earthquakeCardItem} onPress={handlePress}>
       <View style={styles.earthquakeCardItemSize}>
-        <Text style={styles.earthquakeCardItemSizeText}>{mag}</Text>
+        <Text style={styles.earthquakeCardItemSizeText}>{rev || mag}</Text>
       </View>
       <View style={styles.earthquakeCardItemInfoContainer}>
         <Text style={styles.earthquakeCardItemInfoTitle}>{title}</Text>
@@ -29,7 +25,9 @@ const EarthquakeCardItem = ({
         </Text>
       </View>
       <View style={styles.earthquakeCardItemTime}>
-        <Text style={styles.earthquakeCardItemTimeText}>{time}</Text>
+        <Text style={styles.earthquakeCardItemTimeText}>
+          {date.fromNow(timestamp, true)}
+        </Text>
       </View>
     </TouchableOpacity>
   );

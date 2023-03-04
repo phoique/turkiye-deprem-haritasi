@@ -2,16 +2,16 @@ import React from 'react';
 import {configureStore} from '@reduxjs/toolkit';
 import {Provider} from 'react-redux';
 import {setupListeners} from '@reduxjs/toolkit/query';
-import {api} from '../services';
+import {earthquakeApi} from '../services';
 
 export const store = configureStore({
   reducer: {
-    [api.reducerPath]: api.reducer,
+    [earthquakeApi.reducerPath]: earthquakeApi.reducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(api.middleware),
+    }).concat(earthquakeApi.middleware),
   devTools: process.env.REACT_APP_ENV !== 'production',
 });
 

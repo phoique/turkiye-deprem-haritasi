@@ -1,22 +1,23 @@
 import React from 'react';
 import {View, FlatList} from 'react-native';
 import {Container, EarthquakeDetail} from '../../components';
+import {earthquakeApi} from '../../services';
 import {HomeHeader, EarthquakeCardItem} from './components';
 import useStyles from './useStyles';
-import data from './data.json';
 
 const HomeScreen = () => {
   const styles = useStyles();
+
+  const getLastEarthquakes = earthquakeApi.useGetLastEarthquakesQuery({
+    limit: 500,
+  });
 
   const [selectedEarthquake, setSelectedEarthquake] = React.useState(null);
 
   const renderItem = React.useCallback(({item}) => {
     return (
       <EarthquakeCardItem
-        mag={item.mag}
-        title={item.title}
-        depth={item.depth}
-        time={item.date}
+        earthquakeDetail={item}
         setSelectedEarthquake={setSelectedEarthquake}
       />
     );
@@ -34,17 +35,17 @@ const HomeScreen = () => {
   return (
     <Container safeAreaTop={false}>
       <View style={styles.homeContainer}>
-        <HomeHeader />
+        <HomeHeader total={getLastEarthquakes.data?.length} />
         <View style={styles.earthquakeCard}>
           <FlatList
-            data={data.result}
+            data={getLastEarthquakes.data}
             renderItem={renderItem}
             keyExtractor={keyExtractor}
           />
         </View>
       </View>
       <EarthquakeDetail
-        earthquakeId={selectedEarthquake}
+        earthquakeDetail={selectedEarthquake}
         setClose={handleClose}
       />
     </Container>

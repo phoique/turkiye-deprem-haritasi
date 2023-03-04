@@ -1,12 +1,14 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
+import {useTranslation} from 'react-i18next';
 import Icon from '../Icons';
 import useStyles from './useStyles';
 import InfoCard from './InfoCard';
 
 const snapPoints = ['40%', '50%', '65%'];
-const EarthquakeDetail = ({earthquakeId, setClose}) => {
+const EarthquakeDetail = ({earthquakeDetail, setClose}) => {
+  const {t} = useTranslation();
   const styles = useStyles();
 
   const handleSheetChanges = React.useCallback(
@@ -16,8 +18,9 @@ const EarthquakeDetail = ({earthquakeId, setClose}) => {
     [setClose],
   );
 
-  if (!earthquakeId) return null;
+  if (!earthquakeDetail) return null;
 
+  const {mag, title, depth, date, rev, location_properties} = earthquakeDetail;
   return (
     <BottomSheet
       index={snapPoints.length - 1}
@@ -32,33 +35,39 @@ const EarthquakeDetail = ({earthquakeId, setClose}) => {
             style={styles.infoHeaderIcon}
           />
           <View style={styles.infoHeaderTextContainer}>
-            <Text style={styles.infoHeaderTitle}>Türkiye</Text>
-            <Text style={styles.infoHeaderSubTitle}>
-              ASLANBEYCIFTLIGI-GOKSUN (KAHRAMANMARAS)
+            <Text style={styles.infoHeaderTitle}>
+              {t('constants.country.turkey')}
             </Text>
+            <Text style={styles.infoHeaderSubTitle}>{title}</Text>
           </View>
           <View style={styles.infoHeaderMagContainer}>
-            <Text style={styles.infoHeaderMagText}>2.2</Text>
+            <Text style={styles.infoHeaderMagText}>{rev || mag}</Text>
           </View>
         </View>
         <View style={styles.otherInfoRowContainer}>
           <InfoCard
             icon="activity"
-            title="Derinlik"
-            description="10 km derinliğinde"
+            title={t('components.earthquakeDetail.depthTitle')}
+            description={t('components.earthquakeDetail.depthDescription', {
+              depth,
+            })}
           />
           <InfoCard
             icon="activity"
-            title="Etkilenen Bölge"
-            description="Adana, Kahramanmaraş, Mersin"
+            title={t('components.earthquakeDetail.affectedAreaTitle')}
+            description={location_properties.closestCity.name}
           />
         </View>
         <View style={styles.otherInfoRowContainer}>
-          <InfoCard icon="activity" title="Revize" description="-" />
           <InfoCard
             icon="activity"
-            title="Zaman"
-            description="2021.04.25 12:12:12"
+            title={t('components.earthquakeDetail.beforeRevTitle')}
+            description={rev ? `${rev} - ${mag}` : '-'}
+          />
+          <InfoCard
+            icon="activity"
+            title={t('components.earthquakeDetail.timeTitle')}
+            description={date}
           />
         </View>
       </View>

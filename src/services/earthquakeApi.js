@@ -31,8 +31,8 @@ const baseQueryCustom = async (args, api, extraOptions) => {
   return result;
 };
 
-const api = createApi({
-  reducerPath: 'api',
+const earthquakeApi = createApi({
+  reducerPath: 'earthquakeApi',
   refetchOnFocus: true,
   refetchOnReconnect: true,
   baseQuery: baseQueryCustom,
@@ -89,4 +89,4 @@ const invalidatesTags = (type, id) => {
   return [{type, id: 'LIST'}];
 };
 
-export default {...api, providesTags, invalidatesTags};
+export default {...earthquakeApi, providesTags, invalidatesTags};
