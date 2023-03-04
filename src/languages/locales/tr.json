@@ -2,7 +2,8 @@
   "screens": {
     "home": {
       "headerTitle": "Son depremler",
-      "headerSubTitle": "{{total}} adet deprem kaydı bulundu"
+      "headerSubTitle": "{{total}} adet deprem kaydı bulundu",
+      "depth": "Derinlik: {{depth}} km"
     }
   }
 }
