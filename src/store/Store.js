@@ -4,9 +4,12 @@ import {Provider} from 'react-redux';
 import {setupListeners} from '@reduxjs/toolkit/query';
 import {earthquakeApi} from '../services';
 
+import homeSlice from './homeSlice';
+
 export const store = configureStore({
   reducer: {
     [earthquakeApi.reducerPath]: earthquakeApi.reducer,
+    home: homeSlice.reducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

@@ -1,6 +1,7 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import i18n from '../languages';
 import toast from './toast';
+import {store, homeSlice} from '../store';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://api.orhanaydogdu.com.tr/deprem',
@@ -38,10 +39,20 @@ const earthquakeApi = createApi({
   baseQuery: baseQueryCustom,
   endpoints: builder => ({
     getLastEarthquakes: builder.query({
-      query: () => ({
+      query: params => ({
         url: '/kandilli/live',
         method: 'GET',
+        params,
       }),
+      transformResponse: response => {
+        if (response) {
+          store.dispatch(homeSlice.actions.setEarthquakes(response));
+          return homeSlice.earthquakeAdapter
+            .getSelectors()
+            .selectAll(store.getState().home.earthquakes);
+        }
+        return response;
+      },
       providesTags: result =>
         providesTags(result?.data, 'getLastEarthquakes', 'earthquake_id'),
       extraOptions: {
