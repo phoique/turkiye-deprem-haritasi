@@ -5,6 +5,7 @@ import {useTranslation} from 'react-i18next';
 import Icon from '../Icons';
 import useStyles from './useStyles';
 import InfoCard from './InfoCard';
+import {date} from '../../helpers';
 
 const snapPoints = ['40%', '50%', '65%'];
 const EarthquakeDetail = ({earthquakeDetail, setClose}) => {
@@ -24,13 +25,14 @@ const EarthquakeDetail = ({earthquakeDetail, setClose}) => {
     mag,
     title,
     depth,
-    date,
+    date_time: dateTime,
     rev,
     location_properties: {closestCity},
   } = earthquakeDetail;
+
   return (
     <BottomSheet
-      index={snapPoints.length - 1}
+      index={snapPoints.length - 2}
       snapPoints={snapPoints}
       onChange={handleSheetChanges}
       enablePanDownToClose>
@@ -48,7 +50,7 @@ const EarthquakeDetail = ({earthquakeDetail, setClose}) => {
             <Text style={styles.infoHeaderSubTitle}>{title}</Text>
           </View>
           <View style={styles.infoHeaderMagContainer}>
-            <Text style={styles.infoHeaderMagText}>{rev || mag}</Text>
+            <Text style={styles.infoHeaderMagText}>{mag}</Text>
           </View>
         </View>
         <View style={styles.otherInfoRowContainer}>
@@ -74,7 +76,7 @@ const EarthquakeDetail = ({earthquakeDetail, setClose}) => {
           <InfoCard
             icon="clock"
             title={t('components.earthquakeDetail.timeTitle')}
-            description={date}
+            description={date.dateConverter(dateTime, 'DD.MM.YYYY HH:mm:ss')}
           />
         </View>
       </View>

@@ -15,6 +15,12 @@ const fromNow = (date, timestamp = false) => {
   return dayjs(date).fromNow();
 };
 
+const dateConverter = (date, customFormat = 'DD.MM.YYYY HH:mm:ss') => {
+  if (date) return dayjs(date).format(customFormat);
+  return dayjs().format(customFormat);
+};
+
 export default {
   fromNow,
+  dateConverter,
 };
