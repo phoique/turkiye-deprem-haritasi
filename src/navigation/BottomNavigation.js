@@ -24,7 +24,7 @@ const BottomNavigation = () => {
       <Tab.Screen
         name="Map"
         component={MapScreen}
-        options={{tabBarIcon: 'map'}}
+        options={{tabBarIcon: 'map', headerShown: false}}
       />
       <Tab.Screen
         name="Settings"
