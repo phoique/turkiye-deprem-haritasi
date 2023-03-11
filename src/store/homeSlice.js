@@ -10,6 +10,7 @@ const initialState = {
   page: 1,
   hasMore: true,
   selectedEarthquakeId: null,
+  isFilterOpen: false,
 };
 
 const homeSlice = createSlice({
@@ -29,6 +30,9 @@ const homeSlice = createSlice({
     },
     setSelectedEarthquakeId: (state, action) => {
       state.selectedEarthquakeId = action.payload;
+    },
+    setIsFilterOpen: (state, action) => {
+      state.isFilterOpen = action.payload;
     },
   },
 });

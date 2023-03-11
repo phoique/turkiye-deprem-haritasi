@@ -11,7 +11,7 @@ const theme = {
       shadow: '#000',
       red: '#e74c3c',
       lightGray: '#ecf0f1',
-      input: '#dcdde1',
+      success: '#27ae60',
     },
     dark: {},
     colorByMagnitude: {

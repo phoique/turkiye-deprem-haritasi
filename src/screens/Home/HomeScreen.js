@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Container, EarthquakeDetail} from '../../components';
 import {earthquakeApi} from '../../services';
 import {homeSlice} from '../../store';
-import {HomeHeader, EarthquakeCardItem} from './components';
+import {HomeHeader, EarthquakeCardItem, Filter} from './components';
 import useStyles from './useStyles';
 
 const HomeScreen = () => {
@@ -71,6 +71,7 @@ const HomeScreen = () => {
         </View>
       </View>
       <EarthquakeDetail />
+      <Filter />
     </Container>
   );
 };

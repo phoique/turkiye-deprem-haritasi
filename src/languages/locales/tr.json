@@ -3,7 +3,15 @@
     "home": {
       "headerTitle": "Son depremler",
       "headerSubTitle": "{{total}} adet deprem kaydı bulundu",
-      "depth": "Derinlik: {{depth}} km"
+      "depth": "Derinlik: {{depth}} km",
+      "filter": {
+        "title": "Depremleri filtrele",
+        "sort": "Depremleri sırala",
+        "calendar": "Tarih seçin",
+        "city": "Şehir seçin",
+        "reset": "Sıfırla",
+        "filter": "Filtrele"
+      }
     }
   },
   "constants": {
@@ -22,7 +30,8 @@
   },
   "services": {
     "error": {
-      "getLastEarthquakes": "Son depremler alınamadı!"
+      "getLastEarthquakes": "Son depremler alınamadı!",
+      "earthquakeSearch": "Deprem araması yapılırken hata oluştu!"
     },
     "success": {}
   }
