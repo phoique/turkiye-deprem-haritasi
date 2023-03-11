@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  Modal,
-  Alert,
-  TouchableOpacity,
-  FlatList,
-} from 'react-native';
+import {View, Text, Modal, TouchableOpacity, FlatList} from 'react-native';
 import {useTranslation} from 'react-i18next';
 import Container from '../Container';
 import Icon from '../Icons';
@@ -64,14 +57,7 @@ const Select = ({placeholder, data, value}) => {
 
   return (
     <View style={styles.selectInputContainer}>
-      <Modal
-        animationType="slide"
-        transparent
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          setModalVisible(!modalVisible);
-        }}>
+      <Modal animationType="slide" transparent visible={modalVisible}>
         <View style={styles.selectContainer}>
           <Container safeAreaBottom>
             <View style={styles.selectHeaderContainer}>

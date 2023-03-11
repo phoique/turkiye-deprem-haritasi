@@ -28,7 +28,8 @@
       "timeTitle": "Zaman"
     },
     "form": {
-      "resetSelect": "Seçimi sıfırla"
+      "resetSelect": "Seçimi sıfırla",
+      "confirmSelect": "Tarihi seç"
     }
   },
   "services": {
