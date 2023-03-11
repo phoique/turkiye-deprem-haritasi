@@ -2,7 +2,14 @@ import React from 'react';
 import {TextInput} from 'react-native';
 import useStyles from './useStyles';
 
-const Input = ({placeholder, value, onChangeText, keyboardType}) => {
+const Input = ({
+  placeholder,
+  value,
+  onChangeText,
+  keyboardType,
+  editable,
+  onFocus,
+}) => {
   const styles = useStyles();
   return (
     <TextInput
@@ -11,6 +18,9 @@ const Input = ({placeholder, value, onChangeText, keyboardType}) => {
       value={value}
       onChangeText={onChangeText}
       keyboardType={keyboardType}
+      editable={editable}
+      onFocus={onFocus}
+      placeholderTextColor
     />
   );
 };

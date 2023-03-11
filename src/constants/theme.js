@@ -12,6 +12,7 @@ const theme = {
       red: '#e74c3c',
       lightGray: '#ecf0f1',
       success: '#27ae60',
+      placeholder: '#C7C7CD',
     },
     dark: {},
     colorByMagnitude: {

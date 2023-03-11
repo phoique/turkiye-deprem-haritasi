@@ -26,6 +26,9 @@
       "affectedAreaTitle": "Etkilenen iller",
       "beforeRevTitle": "Revize öncesi",
       "timeTitle": "Zaman"
+    },
+    "form": {
+      "resetSelect": "Seçimi sıfırla"
     }
   },
   "services": {
