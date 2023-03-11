@@ -51,6 +51,7 @@ const theme = {
     regular: 'Poppins-Regular',
     medium: 'Poppins-Medium',
     light: 'Poppins-Light',
+    black: 'Poppins-Black',
   },
 };
 
