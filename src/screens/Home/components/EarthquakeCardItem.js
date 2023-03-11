@@ -1,21 +1,26 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {useTranslation} from 'react-i18next';
+import {useDispatch} from 'react-redux';
 import {date} from '../../../helpers';
 import useStyles from '../useStyles';
+import {homeSlice} from '../../../store';
 
 const EarthquakeCardItem = ({
   earthquakeDetail,
-  setSelectedEarthquake,
+
   isLoading,
 }) => {
   const {t} = useTranslation();
+  const dispatch = useDispatch();
   const {title, depth, date_time: dateTime, mag} = earthquakeDetail;
   const styles = useStyles(mag);
 
   const handlePress = React.useCallback(() => {
-    setSelectedEarthquake(earthquakeDetail);
-  }, [earthquakeDetail, setSelectedEarthquake]);
+    dispatch(
+      homeSlice.actions.setSelectedEarthquakeId(earthquakeDetail.earthquake_id),
+    );
+  }, [dispatch, earthquakeDetail.earthquake_id]);
 
   // is loading durumunda bu kartın skeleton görünümü
   if (isLoading) {

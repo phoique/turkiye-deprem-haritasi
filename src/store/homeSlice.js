@@ -9,6 +9,7 @@ const initialState = {
   limit: 20,
   page: 1,
   hasMore: true,
+  selectedEarthquakeId: null,
 };
 
 const homeSlice = createSlice({
@@ -25,6 +26,9 @@ const homeSlice = createSlice({
     },
     setNextPage: state => {
       if (state.hasMore) state.page += 1;
+    },
+    setSelectedEarthquakeId: (state, action) => {
+      state.selectedEarthquakeId = action.payload;
     },
   },
 });

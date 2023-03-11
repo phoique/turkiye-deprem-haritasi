@@ -2,21 +2,35 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
 import {useTranslation} from 'react-i18next';
+import {useDispatch, useSelector} from 'react-redux';
 import Icon from '../Icons';
 import useStyles from './useStyles';
 import InfoCard from './InfoCard';
 import {date} from '../../helpers';
+import {homeSlice} from '../../store';
 
 const snapPoints = ['40%', '50%', '65%'];
-const EarthquakeDetail = ({earthquakeDetail, setClose}) => {
+const EarthquakeDetail = () => {
   const {t} = useTranslation();
+  const dispatch = useDispatch();
   const styles = useStyles();
 
+  const earthquakeDetail = useSelector(
+    ({home: {selectedEarthquakeId, earthquakes}}) => {
+      if (selectedEarthquakeId) {
+        return homeSlice.earthquakeAdapter
+          .getSelectors()
+          .selectById(earthquakes, selectedEarthquakeId);
+      }
+      return null;
+    },
+  );
   const handleSheetChanges = React.useCallback(
     index => {
-      if (index === -1) setClose();
+      if (index === -1)
+        dispatch(homeSlice.actions.setSelectedEarthquakeId(null));
     },
-    [setClose],
+    [dispatch],
   );
 
   if (!earthquakeDetail) return null;

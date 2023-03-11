@@ -20,15 +20,9 @@ const HomeScreen = () => {
     skip: (page - 1) * limit,
   });
 
-  const [selectedEarthquake, setSelectedEarthquake] = React.useState(null);
-
   const renderItem = React.useCallback(({item}) => {
     return (
-      <EarthquakeCardItem
-        earthquakeDetail={item}
-        setSelectedEarthquake={setSelectedEarthquake}
-        isLoading={item?.isLoading}
-      />
+      <EarthquakeCardItem earthquakeDetail={item} isLoading={item?.isLoading} />
     );
   }, []);
 
@@ -36,10 +30,6 @@ const HomeScreen = () => {
     ({earthquake_id: id}) => `home-${id}`,
     [],
   );
-
-  const handleClose = React.useCallback(() => {
-    setSelectedEarthquake(null);
-  }, []);
 
   const loadingData = React.useMemo(() => {
     if (getLastEarthquakeQuery.isLoading) {
@@ -80,10 +70,7 @@ const HomeScreen = () => {
           />
         </View>
       </View>
-      <EarthquakeDetail
-        earthquakeDetail={selectedEarthquake}
-        setClose={handleClose}
-      />
+      <EarthquakeDetail />
     </Container>
   );
 };
