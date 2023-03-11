@@ -11,6 +11,7 @@ const theme = {
       shadow: '#000',
       red: '#e74c3c',
       lightGray: '#ecf0f1',
+      input: '#dcdde1',
     },
     dark: {},
     colorByMagnitude: {
@@ -43,6 +44,13 @@ const theme = {
     h4: 16,
     h5: 13,
     h6: 10,
+  },
+  font: {
+    italic: 'Poppins-Italic',
+    bold: 'Poppins-Bold',
+    regular: 'Poppins-Regular',
+    medium: 'Poppins-Medium',
+    light: 'Poppins-Light',
   },
 };
 
