@@ -2,7 +2,7 @@ import React from 'react';
 import {View, FlatList, RefreshControl} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {Container, EarthquakeDetail} from '../../components';
-import {earthquakeApi} from '../../services';
+import {earthquakeServices} from '../../services';
 import {homeSlice} from '../../store';
 import {HomeHeader, EarthquakeCardItem, Filter} from './components';
 import useStyles from './useStyles';
@@ -15,7 +15,7 @@ const HomeScreen = () => {
     limit: home.limit,
     page: home.page,
   }));
-  const getLastEarthquakeQuery = earthquakeApi.useGetLastEarthquakesQuery({
+  const getLastEarthquakeQuery = earthquakeServices.useGetLastEarthquakesQuery({
     limit,
     skip: (page - 1) * limit,
   });

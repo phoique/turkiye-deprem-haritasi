@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
-import {earthquakeApi} from '../../services';
+import {earthquakeServices} from '../../services';
 import {Container, EarthquakeDetail} from '../../components';
 import useStyles from './useStyles';
 
@@ -9,7 +9,7 @@ const defaultCoordinate = {latitude: 41.0122, longitude: 28.976};
 
 const MapScreen = () => {
   const styles = useStyles();
-  const getLastEarthquakeQuery = earthquakeApi.useGetLastEarthquakesQuery({
+  const getLastEarthquakeQuery = earthquakeServices.useGetLastEarthquakesQuery({
     limit: 1000,
   });
 
