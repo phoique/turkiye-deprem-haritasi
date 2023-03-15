@@ -2,12 +2,14 @@
   "screens": {
     "home": {
       "headerTitle": "Son depremler",
+      "headerTitleFilter": "Filtrelenmiş depremler",
       "headerSubTitle": "{{total}} adet deprem kaydı bulundu",
       "depth": "Derinlik: {{depth}} km",
       "filter": {
         "title": "Depremleri filtrele",
         "sort": "Depremleri sırala",
-        "calendar": "Tarih seçin",
+        "startDate": "Başlangıç tarihi seçin",
+        "endDate": "Bitiş tarihi seçin",
         "city": "Şehir seçin",
         "reset": "Sıfırla",
         "filter": "Filtrele"

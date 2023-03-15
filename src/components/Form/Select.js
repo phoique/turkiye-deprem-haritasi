@@ -17,16 +17,18 @@ const SelectItem = ({value, label, onPress, selectedId}) => {
   );
 };
 
-const Select = ({placeholder, data, value}) => {
+const Select = ({placeholder, data, name, value, onChange}) => {
   const {t} = useTranslation();
   const styles = useStyles();
   const [modalVisible, setModalVisible] = React.useState(false);
-  const [selectedId, setSelectedId] = React.useState(value);
 
-  const handleSelect = React.useCallback(item => {
-    setSelectedId(item.value);
-    setModalVisible(false);
-  }, []);
+  const handleSelect = React.useCallback(
+    item => {
+      setModalVisible(false);
+      onChange(name, item.value);
+    },
+    [name, onChange],
+  );
 
   const renderItem = ({item}) => {
     return (
@@ -34,7 +36,7 @@ const Select = ({placeholder, data, value}) => {
         value={item.value}
         label={item.label}
         onPress={() => handleSelect(item)}
-        selectedId={selectedId}
+        selectedId={value}
       />
     );
   };
@@ -42,8 +44,8 @@ const Select = ({placeholder, data, value}) => {
   const keyExtractor = React.useCallback(item => `select-${item.value}`, []);
 
   const handleReset = React.useCallback(() => {
-    setSelectedId(null);
-  }, []);
+    onChange(name, null);
+  }, [name, onChange]);
 
   const onInputPress = React.useCallback(() => {
     setModalVisible(true);
@@ -73,7 +75,7 @@ const Select = ({placeholder, data, value}) => {
                 data={data}
                 renderItem={renderItem}
                 keyExtractor={keyExtractor}
-                extraData={selectedId}
+                extraData={value}
               />
             </View>
             <View style={styles.selectFooter}>
@@ -89,8 +91,8 @@ const Select = ({placeholder, data, value}) => {
         </View>
       </Modal>
       <TouchableOpacity onPress={onInputPress} style={styles.selectInputButton}>
-        <Text style={styles.selectInputButtonText(selectedId)}>
-          {selectedId ? items[selectedId] : placeholder}
+        <Text style={styles.selectInputButtonText(value)}>
+          {value ? items[value] : placeholder}
         </Text>
       </TouchableOpacity>
     </View>

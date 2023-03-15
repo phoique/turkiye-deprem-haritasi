@@ -6,7 +6,7 @@ import {Icon} from '../../../components';
 import useStyles from '../useStyles';
 import {homeSlice} from '../../../store';
 
-const HomeHeader = ({total}) => {
+const HomeHeader = ({total, isFilterStatus}) => {
   const {t} = useTranslation();
   const styles = useStyles();
   const dispatch = useDispatch();
@@ -22,7 +22,9 @@ const HomeHeader = ({total}) => {
       </TouchableOpacity>
       <View style={styles.homeHeaderContainer}>
         <Text style={styles.homeHeaderTitle}>
-          {t('screens.home.headerTitle')}
+          {isFilterStatus
+            ? t('screens.home.headerTitleFilter')
+            : t('screens.home.headerTitle')}
         </Text>
         <Text style={styles.homeHeaderSubtitle}>
           {t('screens.home.headerSubTitle', {total})}

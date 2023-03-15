@@ -15,12 +15,30 @@ const fromNow = (date, timestamp = false) => {
   return dayjs(date).fromNow();
 };
 
+/**
+ * @description Gelen zaman türünü belirtilen formata göre döndürür.
+ * @param {*} date
+ * @param {*} customFormat
+ * @returns {string}
+ */
 const dateConverter = (date, customFormat = 'DD.MM.YYYY HH:mm:ss') => {
   if (date) return dayjs(date).format(customFormat);
   return dayjs().format(customFormat);
 };
 
+/**
+ * @description Gelen zaman türünü dayjs objesine dönüştürür.
+ * @param {*} date
+ * @param {*} customFormat
+ * @returns
+ */
+const dateObject = (date, customFormat = 'DD.MM.YYYY HH:mm:ss') => {
+  if (date) return dayjs(date, customFormat).toDate();
+  return dayjs().toDate();
+};
+
 export default {
   fromNow,
   dateConverter,
+  dateObject,
 };

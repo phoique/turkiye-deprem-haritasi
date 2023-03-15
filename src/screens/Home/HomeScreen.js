@@ -11,14 +11,37 @@ const HomeScreen = () => {
   const styles = useStyles();
   const dispatch = useDispatch();
 
-  const {limit, page} = useSelector(({home}) => ({
+  const {limit, page, filter} = useSelector(({home}) => ({
     limit: home.limit,
     page: home.page,
+    filter: home.filter,
   }));
+
+  // Filtreleme yapılacak mı?
+  const isFilterStatus = React.useMemo(
+    () => Object.values(filter).some(value => !!value),
+    [filter],
+  );
+
   const getLastEarthquakeQuery = earthquakeServices.useGetLastEarthquakesQuery({
     limit,
     skip: (page - 1) * limit,
   });
+
+  const earthquakeSearchQuery = earthquakeServices.useEarthquakeSearchQuery(
+    {
+      limit,
+      skip: (page - 1) * limit,
+      match: {
+        date_starts: filter.startDate,
+        date_ends: filter.endDate,
+        cityCode: filter.city,
+      },
+    },
+    {
+      skip: isFilterStatus,
+    },
+  );
 
   const renderItem = React.useCallback(({item}) => {
     return (
@@ -31,15 +54,25 @@ const HomeScreen = () => {
     [],
   );
 
-  const loadingData = React.useMemo(() => {
-    if (getLastEarthquakeQuery.isLoading) {
+  const data = React.useMemo(() => {
+    if (getLastEarthquakeQuery.isLoading || earthquakeSearchQuery.isLoading) {
       return [...Array(4).keys()].map(index => ({
         earthquake_id: `loading-${index}`,
         isLoading: true,
       }));
     }
-    return null;
-  }, [getLastEarthquakeQuery.isLoading]);
+
+    if (isFilterStatus) {
+      return earthquakeSearchQuery.data;
+    }
+    return getLastEarthquakeQuery.data;
+  }, [
+    earthquakeSearchQuery.data,
+    earthquakeSearchQuery.isLoading,
+    getLastEarthquakeQuery.data,
+    getLastEarthquakeQuery.isLoading,
+    isFilterStatus,
+  ]);
 
   const handleNextPage = React.useCallback(() => {
     dispatch(homeSlice.actions.setNextPage());
@@ -53,10 +86,10 @@ const HomeScreen = () => {
   return (
     <Container safeAreaTop={false}>
       <View style={styles.homeContainer}>
-        <HomeHeader total={getLastEarthquakeQuery.data?.length} />
+        <HomeHeader total={data?.length} isFilterStatus={isFilterStatus} />
         <View style={styles.earthquakeCard}>
           <FlatList
-            data={loadingData ?? getLastEarthquakeQuery.data}
+            data={data}
             renderItem={renderItem}
             keyExtractor={keyExtractor}
             onEndReached={handleNextPage}
