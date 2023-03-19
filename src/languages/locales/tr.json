@@ -12,7 +12,13 @@
         "endDate": "Bitiş tarihi seçin",
         "city": "Şehir seçin",
         "reset": "Sıfırla",
-        "filter": "Filtrele"
+        "filter": "Filtrele",
+        "sortItems": {
+          "dateFromNewToOld": "Tarihe göre (Yeniden eskiye)",
+          "dateFromOldToNew": "Tarihe göre (Eskiden yeniye)",
+          "magFromHighToLow": "Şiddete göre (Yüksekten düşüğe)",
+          "magFromLowToHigh": "Şiddete göre (Düşükten yükseğe)"
+        }
       }
     }
   },

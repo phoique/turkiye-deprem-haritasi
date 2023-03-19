@@ -8,6 +8,7 @@ import {homeSlice} from '../../../store';
 import {FormGroup, Select, SelectCalendar} from '../../../components';
 import {staticsServices} from '../../../services';
 import {selectDataGenerator} from './helpers';
+import {useFilterSort} from '../hooks';
 
 const snapPoints = ['65%'];
 const initialFilter = {
@@ -20,6 +21,7 @@ const Filter = () => {
   const dispatch = useDispatch();
   const {t} = useTranslation();
   const styles = useStyles();
+  const shortData = useFilterSort();
 
   const filter = useSelector(({home}) => home.filter);
   const [formState, setFormState] = React.useState({...filter});
@@ -76,8 +78,9 @@ const Filter = () => {
           <Select
             name="sort"
             placeholder={t(`${i18nPrefix}.sort`)}
-            data={[]}
+            data={shortData}
             onChange={handleChange}
+            value={formState.sort}
           />
         </FormGroup>
         <FormGroup icon="calendar">

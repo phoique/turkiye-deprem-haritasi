@@ -37,6 +37,7 @@ const HomeScreen = () => {
         date_ends: filter.endDate,
         cityCode: filter.city,
       },
+      sort: filter.sort,
     },
     {skip: !isFilterStatus},
   );
