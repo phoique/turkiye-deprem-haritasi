@@ -37,6 +37,15 @@ const earthquakeServices = earthquakeApi.injectEndpoints({
         method: 'POST',
         body,
       }),
+      transformResponse: response => {
+        if (response) {
+          store.dispatch(homeSlice.actions.setEarthquakes(response));
+          return homeSlice.earthquakeAdapter
+            .getSelectors()
+            .selectAll(store.getState().home.earthquakes);
+        }
+        return response;
+      },
       providesTags: result =>
         earthquakeApi.providesTags(
           result?.data,

@@ -45,6 +45,8 @@ const homeSlice = createSlice({
       state.filter = action.payload;
       state.page = 1;
       state.hasMore = true;
+      state.selectedEarthquakeId = null;
+      earthquakeAdapter.removeAll(state.earthquakes);
     },
   },
 });

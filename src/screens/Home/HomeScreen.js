@@ -38,9 +38,7 @@ const HomeScreen = () => {
         cityCode: filter.city,
       },
     },
-    {
-      skip: isFilterStatus,
-    },
+    {skip: !isFilterStatus},
   );
 
   const renderItem = React.useCallback(({item}) => {
