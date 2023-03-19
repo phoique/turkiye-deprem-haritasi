@@ -54,7 +54,7 @@ const HomeScreen = () => {
   );
 
   const data = React.useMemo(() => {
-    if (getLastEarthquakeQuery.isLoading || earthquakeSearchQuery.isLoading) {
+    if (getLastEarthquakeQuery.isLoading || earthquakeSearchQuery.isFetching) {
       return [...Array(4).keys()].map(index => ({
         earthquake_id: `loading-${index}`,
         isLoading: true,
@@ -67,7 +67,7 @@ const HomeScreen = () => {
     return getLastEarthquakeQuery.data;
   }, [
     earthquakeSearchQuery.data,
-    earthquakeSearchQuery.isLoading,
+    earthquakeSearchQuery.isFetching,
     getLastEarthquakeQuery.data,
     getLastEarthquakeQuery.isLoading,
     isFilterStatus,
