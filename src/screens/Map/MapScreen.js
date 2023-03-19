@@ -1,79 +1,82 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
+import {View, ActivityIndicator} from 'react-native';
+import MapView from 'react-native-maps';
 import {earthquakeServices} from '../../services';
 import {Container, EarthquakeDetail} from '../../components';
 import useStyles from './useStyles';
+import {debounce} from './helpers';
+import {EarthquakeMarker} from './components';
 
 const defaultCoordinate = {latitude: 41.0122, longitude: 28.976};
 
 const MapScreen = () => {
   const styles = useStyles();
-  const getLastEarthquakeQuery = earthquakeServices.useGetLastEarthquakesQuery({
-    limit: 1000,
-  });
-
+  const [fitbounds, setFitbounds] = React.useState(true);
   const [map, setMap] = React.useState(null);
   const [region, setRegion] = React.useState({
     latitude: defaultCoordinate.latitude,
     longitude: defaultCoordinate.longitude,
   });
-  const [selectedEarthquake, setSelectedEarthquake] = React.useState(null);
+
+  const getLastEarthquakeQuery = earthquakeServices.useEarthquakeSearchQuery(
+    {
+      limit: 100,
+      geoNear: {
+        lon: region.longitude,
+        lat: region.latitude,
+        radiusMeter: 100,
+      },
+    },
+    {skip: !region.latitude || !region.longitude},
+  );
 
   React.useEffect(() => {
-    if (map && getLastEarthquakeQuery.data) {
+    if (map && getLastEarthquakeQuery.currentData && fitbounds) {
       const ids = [];
-      for (let i = 0; i < getLastEarthquakeQuery.data.length; i += 1) {
-        ids.push(getLastEarthquakeQuery.data[i].earthquake_id);
+      for (let i = 0; i < getLastEarthquakeQuery.currentData.length; i += 1) {
+        ids.push(getLastEarthquakeQuery.currentData[i].earthquake_id);
       }
       map.fitToSuppliedMarkers(ids);
+      setFitbounds(false);
     }
-  }, [getLastEarthquakeQuery.data, map]);
+  }, [fitbounds, getLastEarthquakeQuery.currentData, map]);
 
-  const handleClose = React.useCallback(() => {
-    setSelectedEarthquake(null);
-  }, []);
+  const debouncedFunction = debounce(handleRegionChange, 1000);
+  function handleRegionChange({latitude, longitude}) {
+    setRegion({latitude, longitude});
+  }
 
   return (
     <Container safeAreaTop={false}>
       <MapView
         ref={ref => setMap(ref)}
-        provider={PROVIDER_GOOGLE}
         style={styles.container}
+        minZoomLevel={5}
+        maxZoomLevel={20}
         region={{
-          latitude: region.latitude,
-          longitude: region.longitude,
+          latitude: defaultCoordinate.latitude,
+          longitude: defaultCoordinate.longitude,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
-        }}>
+        }}
+        onRegionChangeComplete={debouncedFunction}>
         {getLastEarthquakeQuery.data?.map(earthquake => (
-          <Marker
-            identifier={earthquake.earthquake_id}
+          <EarthquakeMarker
             key={earthquake.earthquake_id}
-            coordinate={{
-              latitude: earthquake.geojson.coordinates[1],
-              longitude: earthquake.geojson.coordinates[0],
-            }}
-            onPress={() => {
-              setSelectedEarthquake(earthquake);
-              setRegion({
-                latitude: earthquake.geojson.coordinates[1],
-                longitude: earthquake.geojson.coordinates[0],
-              });
-            }}>
-            <View
-              style={styles.markerContainer(earthquake.rev || earthquake.mag)}>
-              <Text style={styles.markerText}>
-                {earthquake.rev || earthquake.mag}
-              </Text>
-            </View>
-          </Marker>
+            id={earthquake.earthquake_id}
+            latitude={earthquake.geojson.coordinates[1]}
+            longitude={earthquake.geojson.coordinates[0]}
+            mag={earthquake.mag}
+            map={map}
+          />
         ))}
       </MapView>
-      <EarthquakeDetail
-        earthquakeDetail={selectedEarthquake}
-        setClose={handleClose}
-      />
+      {getLastEarthquakeQuery.isFetching && (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" />
+        </View>
+      )}
+      <EarthquakeDetail />
     </Container>
   );
 };
