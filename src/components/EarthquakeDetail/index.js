@@ -40,13 +40,12 @@ const EarthquakeDetail = () => {
     title,
     depth,
     date_time: dateTime,
-    rev,
-    location_properties: {closestCity},
+    location_properties: {closestCities, epiCenter},
   } = earthquakeDetail;
 
   return (
     <BottomSheet
-      index={snapPoints.length - 2}
+      index={snapPoints.length - 1}
       snapPoints={snapPoints}
       onChange={handleSheetChanges}
       enablePanDownToClose>
@@ -77,15 +76,15 @@ const EarthquakeDetail = () => {
           />
           <InfoCard
             icon="list"
-            title={t('components.earthquakeDetail.affectedAreaTitle')}
-            description={closestCity.name}
+            title={t('components.earthquakeDetail.closestCitiesTitle')}
+            description={closestCities.map(city => city.name).join(', ')}
           />
         </View>
         <View style={styles.otherInfoRowContainer}>
           <InfoCard
-            icon="edit-3"
-            title={t('components.earthquakeDetail.beforeRevTitle')}
-            description={rev ? `${rev} - ${mag}` : '-'}
+            icon="user"
+            title={t('components.earthquakeDetail.populationTitle')}
+            description={epiCenter.population}
           />
           <InfoCard
             icon="clock"

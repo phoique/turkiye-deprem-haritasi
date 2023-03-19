@@ -31,9 +31,9 @@
     "earthquakeDetail": {
       "depthTitle": "Derinlik",
       "depthDescription": "{{depth}} km derinlikte",
-      "affectedAreaTitle": "Etkilenen iller",
-      "beforeRevTitle": "Revize öncesi",
-      "timeTitle": "Zaman"
+      "closestCitiesTitle": "En yakın şehirler",
+      "populationTitle": "Nüfus",
+      "timeTitle": "Olduğu zaman"
     },
     "form": {
       "resetSelect": "Seçimi sıfırla",
