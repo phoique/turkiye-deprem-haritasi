@@ -5,9 +5,14 @@ import {earthquakeServices} from '../../services';
 import {Container, EarthquakeDetail} from '../../components';
 import useStyles from './useStyles';
 import {debounce} from './helpers';
-import {EarthquakeMarker} from './components';
+import {EarthquakeMarker, MyLocation} from './components';
 
-const defaultCoordinate = {latitude: 41.0122, longitude: 28.976};
+const defaultCoordinate = {
+  latitude: 41.0122,
+  longitude: 28.976,
+  latitudeDelta: 0.0922,
+  longitudeDelta: 0.0421,
+};
 
 const MapScreen = () => {
   const styles = useStyles();
@@ -46,6 +51,14 @@ const MapScreen = () => {
     setRegion({latitude, longitude});
   }
 
+  const changeRegion = React.useCallback(
+    ({latitude, longitude}) => {
+      setRegion({latitude, longitude});
+      map.animateToRegion({...defaultCoordinate, latitude, longitude}, 1000);
+    },
+    [map],
+  );
+
   return (
     <Container safeAreaTop={false}>
       <MapView
@@ -53,11 +66,9 @@ const MapScreen = () => {
         style={styles.container}
         minZoomLevel={5}
         maxZoomLevel={20}
-        region={{
+        initialRegion={{
           latitude: defaultCoordinate.latitude,
           longitude: defaultCoordinate.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
         }}
         onRegionChangeComplete={debouncedFunction}>
         {getLastEarthquakeQuery.data?.map(earthquake => (
@@ -76,6 +87,7 @@ const MapScreen = () => {
           <ActivityIndicator size="large" />
         </View>
       )}
+      <MyLocation changeRegion={changeRegion} />
       <EarthquakeDetail />
     </Container>
   );

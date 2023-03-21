@@ -32,6 +32,16 @@ function useStyles() {
       backgroundColor: colors[themeMode].lightGray,
       borderRadius: 15,
     },
+    myLocationContainer: {
+      position: 'absolute',
+      bottom: 0,
+      right: 0,
+      backgroundColor: colors[themeMode].white,
+      borderRadius: 15,
+      padding: 10,
+      marginBottom: 10,
+      marginRight: 10,
+    },
   });
 }
 

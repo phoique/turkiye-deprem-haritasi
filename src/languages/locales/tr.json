@@ -20,6 +20,9 @@
           "magFromLowToHigh": "Şiddete göre (Düşükten yükseğe)"
         }
       }
+    },
+    "map": {
+      "locationInfo": "Konum bilgisi alınamadı!"
     }
   },
   "constants": {
