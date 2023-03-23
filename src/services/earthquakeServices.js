@@ -1,6 +1,10 @@
 import earthquakeApi from './earthquakeApi';
 import {store, homeSlice} from '../store';
 
+earthquakeApi.enhanceEndpoints({
+  addTagTypes: ['getLastEarthquakes', 'earthquakeSearch'],
+});
+
 const earthquakeServices = earthquakeApi.injectEndpoints({
   endpoints: builder => ({
     // Son depremleri getiren servis.
@@ -21,7 +25,7 @@ const earthquakeServices = earthquakeApi.injectEndpoints({
       },
       providesTags: result =>
         earthquakeApi.providesTags(
-          result?.data,
+          result,
           'getLastEarthquakes',
           'earthquake_id',
         ),
@@ -47,11 +51,7 @@ const earthquakeServices = earthquakeApi.injectEndpoints({
         return response;
       },
       providesTags: result =>
-        earthquakeApi.providesTags(
-          result?.data,
-          'earthquakeSearch',
-          'earthquake_id',
-        ),
+        earthquakeApi.providesTags(result, 'earthquakeSearch', 'earthquake_id'),
       extraOptions: {
         toastErrorMessageKey: 'earthquakeSearch',
       },
