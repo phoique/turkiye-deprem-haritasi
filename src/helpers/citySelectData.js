@@ -3,7 +3,7 @@
  * @param {Object} cities
  * @returns {Array}
  */
-export const selectDataGenerator = cities => {
+export const citySelectData = cities => {
   const response = [];
   if (cities) {
     const citiesArray = Object.values(cities);

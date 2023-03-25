@@ -8,7 +8,7 @@ import useStyles from './useStyles';
 import {homeSlice} from '../../../store';
 import {FormGroup, Select, SelectCalendar} from '../../../components';
 import {staticsServices} from '../../../services';
-import {selectDataGenerator} from './helpers';
+import {citySelectData} from '../../../helpers';
 import {useFilterSort} from '../hooks';
 
 const snapPoints = ['65%'];
@@ -24,7 +24,7 @@ const Filter = () => {
   const cityListQuery = staticsServices.useCityListQuery(null, {
     selectFromResult: result => ({
       ...result,
-      data: selectDataGenerator(result.data),
+      data: citySelectData(result.data),
     }),
     skip: !isFilterOpen,
   });
