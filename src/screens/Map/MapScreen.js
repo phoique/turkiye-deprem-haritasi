@@ -1,11 +1,13 @@
 import React from 'react';
 import {View, ActivityIndicator} from 'react-native';
 import MapView from 'react-native-maps';
+import {useDispatch, useSelector} from 'react-redux';
 import {earthquakeServices} from '../../services';
 import {Container, EarthquakeDetail} from '../../components';
 import useStyles from './useStyles';
 import {debounce} from './helpers';
 import {EarthquakeMarker, MapFilter, MyLocation} from './components';
+import {mapSlice} from '../../store';
 
 const defaultCoordinate = {
   latitude: 41.0122,
@@ -15,7 +17,9 @@ const defaultCoordinate = {
 };
 
 const MapScreen = () => {
+  const dispatch = useDispatch();
   const styles = useStyles();
+  const filter = useSelector(({map}) => map.filter);
   const [fitbounds, setFitbounds] = React.useState(true);
   const [map, setMap] = React.useState(null);
   const [region, setRegion] = React.useState({
@@ -23,15 +27,28 @@ const MapScreen = () => {
     longitude: defaultCoordinate.longitude,
   });
 
-  const getLastEarthquakeQuery = earthquakeServices.useEarthquakeSearchQuery(
-    {
+  const body = React.useMemo(() => {
+    if (filter.city) {
+      return {
+        limit: 100,
+        match: {
+          cityCode: filter.city,
+        },
+      };
+    }
+    return {
       limit: 100,
       geoNear: {
         lon: region.longitude,
         lat: region.latitude,
         radiusMeter: 100,
       },
-    },
+    };
+  }, [filter.city, region.latitude, region.longitude]);
+
+  console.log(body);
+  const getLastEarthquakeQuery = earthquakeServices.useEarthquakeSearchQuery(
+    body,
     {skip: !region.latitude || !region.longitude},
   );
 
@@ -88,7 +105,7 @@ const MapScreen = () => {
         </View>
       )}
       <MyLocation changeRegion={changeRegion} />
-      <MapFilter />
+      <MapFilter setFitbounds={setFitbounds} />
       <EarthquakeDetail />
     </Container>
   );

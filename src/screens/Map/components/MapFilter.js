@@ -5,14 +5,14 @@ import {useTranslation} from 'react-i18next';
 import {useDispatch, useSelector} from 'react-redux';
 import {Formik} from 'formik';
 import useStyles from '../useStyles';
-import {mapSlice} from '../../../store';
+import {homeSlice, mapSlice} from '../../../store';
 import {FormGroup, Select, Icon} from '../../../components';
 import {staticsServices} from '../../../services';
 import {citySelectData} from '../../../helpers';
 import useHomeStyles from '../../Home/components/useStyles';
 
 const snapPoints = ['35%'];
-const MapFilter = () => {
+const MapFilter = ({setFitbounds}) => {
   const styles = useStyles();
   const homeStyles = useHomeStyles();
 
@@ -60,8 +60,10 @@ const MapFilter = () => {
               city: filter.city,
             }}
             onSubmit={values => {
+              dispatch(homeSlice.actions.resetEarthquake());
               dispatch(mapSlice.actions.setFilterData(values));
               setIsFilterOpen(false);
+              setFitbounds(true);
             }}
             enableReinitialize>
             {({setFieldValue, handleSubmit, values}) => (
@@ -95,4 +97,4 @@ const MapFilter = () => {
   );
 };
 
-export default MapFilter;
+export default React.memo(MapFilter);

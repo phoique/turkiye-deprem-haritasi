@@ -48,6 +48,9 @@ const homeSlice = createSlice({
       state.selectedEarthquakeId = null;
       earthquakeAdapter.removeAll(state.earthquakes);
     },
+    resetEarthquake: state => {
+      state.earthquakes = earthquakeAdapter.removeAll(state.earthquakes);
+    },
   },
 });
 
