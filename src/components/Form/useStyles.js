@@ -82,7 +82,7 @@ function useStyles() {
       justifyContent: 'center',
     },
     selectInputButtonText: isSelected => ({
-      fontSize: typography.h4 - 2,
+      fontSize: typography.h4 - 3,
       fontFamily: font.regular,
       color: isSelected
         ? colors[themeMode].black

@@ -50,7 +50,7 @@ const SelectCalendar = ({
         onPress={onInputPress}
         style={styles.selectInputButton}
         disabled={disabled}>
-        <Text style={styles.selectInputButtonText(false)}>
+        <Text style={styles.selectInputButtonText(!!value)}>
           {value ? date.dateConverter(value, 'DD.MM.YYYY') : placeholder}
         </Text>
       </TouchableOpacity>
