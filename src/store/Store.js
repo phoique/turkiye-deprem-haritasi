@@ -5,11 +5,13 @@ import {setupListeners} from '@reduxjs/toolkit/query';
 import {earthquakeApi} from '../services';
 
 import homeSlice from './homeSlice';
+import mapSlice from './mapSlice';
 
 export const store = configureStore({
   reducer: {
     [earthquakeApi.reducerPath]: earthquakeApi.reducer,
     home: homeSlice.reducer,
+    map: mapSlice.reducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

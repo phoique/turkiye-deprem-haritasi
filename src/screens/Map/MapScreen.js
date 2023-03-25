@@ -5,7 +5,7 @@ import {earthquakeServices} from '../../services';
 import {Container, EarthquakeDetail} from '../../components';
 import useStyles from './useStyles';
 import {debounce} from './helpers';
-import {EarthquakeMarker, MyLocation} from './components';
+import {EarthquakeMarker, MapFilter, MyLocation} from './components';
 
 const defaultCoordinate = {
   latitude: 41.0122,
@@ -88,6 +88,7 @@ const MapScreen = () => {
         </View>
       )}
       <MyLocation changeRegion={changeRegion} />
+      <MapFilter />
       <EarthquakeDetail />
     </Container>
   );
